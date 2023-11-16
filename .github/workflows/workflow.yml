@@ -24,7 +24,5 @@ jobs:
           echo "S3_BUCKET=mybucket991821" >> $GITHUB_ENV
       - name: print console
         run: |
-          echo "${{env.AWS_DEFAULT_REGION}}"
-          echo "${{env.AWS_ACCESS_KEY_ID}}"
-          echo "${{env.AWS_SECRET_ACCESS_KEY}}"
+          echo "${{github.workspace}}"
 
