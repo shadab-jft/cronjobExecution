@@ -1,0 +1,31 @@
+name: Package CronjobExecution
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '*.js'
+
+jobs:
+  package:
+    name: Package Lambda Functions and Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - name: Set vars
+        run: |
+          echo "LAMBDA_FUNCTION_NAME=cronjobsExecution" >> $GITHUB_ENV
+          echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
+          echo "S3_BUCKET=mybucket991821" >> $GITHUB_ENV
+      - name: print console
+        run: |
+          echo "env.AWS_DEFAULT_REGION"
+          echo "env.AWS_ACCESS_KEY_ID"
+          echo "env.AWS_SECRET_ACCESS_KEY"
