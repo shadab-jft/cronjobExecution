@@ -22,7 +22,10 @@ jobs:
           echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
           echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
           echo "S3_BUCKET=mybucket991821" >> $GITHUB_ENV
-      - name: print console
-        run: |
-          echo "${{github.workspace}}"
-
+      - name: Install node module dependencies
+        working-directory: ${{ github.workspace }}
+        run: npm install
+      - name: Zip Folder
+        working-directory: ${{ github.workspace }}
+        run: zip -r ${LAMBDA_FUNCTION_NAME}.zip .
+      
